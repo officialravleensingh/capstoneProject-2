@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { NavBar } from "./NavBar";
 import { Card, CardContent } from "@/components/ui/card";
-import { Play, Search } from "lucide-react";
+import { Search } from "lucide-react";
 
 const mockVideos = [
   {

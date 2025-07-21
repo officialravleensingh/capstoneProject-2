@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Menu, X } from "lucide-react";
 
 export function NavBar({ toggleTheme, isDarkMode }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const toggleMenu = () => setMenuOpen(prev => !prev);
   return (
     <header className="border-b sticky top-0 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
@@ -33,7 +37,6 @@ export function NavBar({ toggleTheme, isDarkMode }) {
             </Link>
           </nav>
         </div>
-
         <div className="flex items-center gap-4">
           <Button
             onClick={toggleTheme}
@@ -42,8 +45,40 @@ export function NavBar({ toggleTheme, isDarkMode }) {
           >
             {isDarkMode ? "Light" : "Dark"}
           </Button>
+          <button
+            onClick={toggleMenu}
+            className="md:hidden p-2 rounded-full hover:bg-muted transition"
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
       </div>
+      {menuOpen && (
+        <nav className="md:hidden px-4 pb-4 pt-2 flex gap-6 justify-center">
+          <Link
+            to="/"
+            className="block text-sm font-medium text-muted-foreground hover:text-primary"
+            onClick={() => setMenuOpen(false)}
+          >
+            Pomodoro
+          </Link>
+          <Link
+            to="/videos"
+            className="block text-sm font-medium text-muted-foreground hover:text-primary"
+            onClick={() => setMenuOpen(false)}
+          >
+            Videos
+          </Link>
+          <Link
+            to="/resources"
+            className="block text-sm font-medium text-muted-foreground hover:text-primary"
+            onClick={() => setMenuOpen(false)}
+          >
+            Resources
+          </Link>
+        </nav>
+      )}
     </header>
   );
 }

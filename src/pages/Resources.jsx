@@ -47,43 +47,19 @@ const mockResources = [
   }
 ];
 
-const Resources = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+const Resources = ({ toggleTheme, isDarkMode }) => {
   const [searchTerm, setSearchTerm] = useState("");
-
-  useEffect(() => {
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    if (prefersDark) {
-      setIsDarkMode(true);
-      document.documentElement.classList.add("dark");
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    if (isDarkMode) {
-      document.documentElement.classList.remove("dark");
-    } else {
-      document.documentElement.classList.add("dark");
-    }
-    setIsDarkMode(!isDarkMode);
-  };
-
   const filteredResources = mockResources.filter(resource =>
     resource.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
   return (
     <div className="min-h-screen flex flex-col">
       <NavBar toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
 
       <main className="flex-1 py-8 container space-y-6">
         <div className="mb-8">
-          <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-2">
-            Resources
-          </h1>
-          <p className="text-muted-foreground text-xl">
-            Read or download our productivity guides and cheat sheets.
-          </p>
+          <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-2">Resources</h1>
+          <p className="text-muted-foreground text-xl">Read or download our productivity guides and cheat sheets.</p>
         </div>
 
         <div className="relative mb-6">
@@ -114,15 +90,7 @@ const Resources = () => {
                         <span>{resource.fileSize}</span>
                       </div>
                     </div>
-                    <a 
-                      href={resource.url} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                    >
-                      <Button>
-                        Open
-                      </Button>
-                    </a>
+                    <a href={resource.url} target="_blank" rel="noopener noreferrer"><Button>Open</Button></a>
                   </div>
                 </CardContent>
               </Card>

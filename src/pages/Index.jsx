@@ -10,7 +10,6 @@ const PomodoroTimer = () => {
     pomodoro: 25,
     shortBreak: 5,
   });
-
   useEffect(() => {
     let time;
     switch (activeMode) {
@@ -26,10 +25,8 @@ const PomodoroTimer = () => {
     setTimeLeft(time);
     setIsRunning(false);
   }, [activeMode, timerSettings]);
-
   useEffect(() => {
     let interval = null;
-
     if (isRunning && timeLeft > 0) {
       interval = setInterval(() => {
         setTimeLeft((timeLeft) => timeLeft - 1);
@@ -44,16 +41,13 @@ const PomodoroTimer = () => {
         setIsRunning(false);
       }
     }
-
     return () => clearInterval(interval);
   }, [isRunning, timeLeft, activeMode, completedPomodoros]);
 
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins.toString().padStart(2, "0")}:${secs
-      .toString()
-      .padStart(2, "0")}`;
+    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   };
 
   const calculateProgress = () => {
@@ -68,7 +62,6 @@ const PomodoroTimer = () => {
       default:
         totalTime = timerSettings.pomodoro * 60;
     }
-
     return ((totalTime - timeLeft) / totalTime) * 100;
   };
 
@@ -91,7 +84,6 @@ const PomodoroTimer = () => {
   const updateTimerSettings = (newSettings) => {
     setTimerSettings(newSettings);
   };
-
   return (
     <div className="flex flex-col items-center">
       <div className="bg-gray-100 dark:bg-gray-800 rounded-full p-1 flex mb-8 shadow-md">
@@ -100,83 +92,48 @@ const PomodoroTimer = () => {
           className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${activeMode === "pomodoro"
               ? "bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-sm"
               : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
-            }`}
-        >
-          Focus
-        </button>
+            }`}>Focus</button>
         <button
           onClick={() => setActiveMode("shortBreak")}
           className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${activeMode === "shortBreak"
               ? "bg-white dark:bg-gray-700 text-blue-600 dark:text-green-400 shadow-sm"
               : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
-            }`}
-        >
-          Short Break
-        </button>
+            }`}>Short Break</button>
       </div>
 
       <div className="relative w-64 h-64 flex items-center justify-center mb-8">
         <svg className="absolute w-full h-full -rotate-90" viewBox="0 0 100 100">
-          <circle
-            className="text-gray-200 dark:text-gray-700 stroke-current"
-            strokeWidth="4"
-            cx="50"
-            cy="50"
-            r="46"
-            fill="transparent"
-          />
+          <circle className="text-gray-200 dark:text-gray-700 stroke-current" strokeWidth="4" cx="50" cy="50" r="46" fill="transparent"/>
           <circle
             className={`stroke-current ${activeMode === "pomodoro"
                 ? "text-blue-500"
-                : "text-green-500"
-              }`}
-            strokeWidth="4"
-            strokeLinecap="round"
-            cx="50"
-            cy="50"
-            r="46"
-            fill="transparent"
-            strokeDasharray="289.02"
-            strokeDashoffset={289.02 - (289.02 * calculateProgress()) / 100}
-          />
+                : "text-green-500"}`} 
+                strokeWidth="4" strokeLinecap="round" cx="50" cy="50" r="46" fill="transparent" strokeDasharray="289.02"
+                strokeDashoffset={289.02 - (289.02 * calculateProgress()) / 100}/>
         </svg>
 
         <div className="text-center z-10">
           <div className="text-5xl font-bold">{formatTime(timeLeft)}</div>
           <div className="mt-2 text-sm font-medium uppercase text-gray-500 dark:text-gray-400">
-            {activeMode === "pomodoro"
-              ? "Focus"
-              : "Short Break"}
-          </div>
+            {activeMode === "pomodoro" ? "Focus" : "Short Break"}</div>
         </div>
       </div>
 
       <div className="flex space-x-4 mb-8">
-        <button
-          onClick={() => setIsRunning(!isRunning)}
+        <button onClick={() => setIsRunning(!isRunning)}
           className={`px-6 py-3 rounded-full font-medium shadow-md transition-all ${isRunning
-              ? "bg-red-500 hover:bg-red-600 text-white"
-              : "bg-blue-500 hover:bg-blue-600 text-white"
-            }`}
-        >
-          {isRunning ? "Pause" : "Start"}
-        </button>
-        <button
-          onClick={resetTimer}
-          className="px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 flex items-center justify-center shadow-md transition-colors text-sm font-medium"
-        >
-          Reset
-        </button>
+              ? "bg-red-500 hover:bg-red-600 text-white" : "bg-blue-500 hover:bg-blue-600 text-white" }`} >
+          {isRunning ? "Pause" : "Start"} </button>
+
+        <button onClick={resetTimer}
+          className="px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 flex items-center justify-center shadow-md transition-colors text-sm font-medium" >Reset</button>
       </div>
 
       <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-80 max-w-md shadow-lg border border-gray-200 dark:border-gray-700 mb-8">
         <h3 className="text-lg font-semibold mb-4 text-center">Timer Settings</h3>
-
         <div className="space-y-6">
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Focus Time: {timerSettings.pomodoro} minutes
-            </label>
+            <label className="block text-sm font-medium mb-2">Focus Time: {timerSettings.pomodoro} minutes</label>
             <input
               type="range"
               min="15"
@@ -218,26 +175,7 @@ const PomodoroTimer = () => {
   );
 };
 
-const Index = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    if (prefersDark) {
-      setIsDarkMode(true);
-      document.documentElement.classList.add("dark");
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    if (isDarkMode) {
-      document.documentElement.classList.remove("dark");
-    } else {
-      document.documentElement.classList.add("dark");
-    }
-    setIsDarkMode(!isDarkMode);
-  };
-
+const Index = ({ toggleTheme, isDarkMode }) => {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200">
       <NavBar toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
@@ -250,7 +188,6 @@ const Index = () => {
             take strategic breaks, and achieve more.
           </p>
         </div>
-
         <PomodoroTimer />
       </main>
 

@@ -6,10 +6,7 @@ const PomodoroTimer = () => {
   const [timeLeft, setTimeLeft] = useState(25 * 60);
   const [isRunning, setIsRunning] = useState(false);
   const [completedPomodoros, setCompletedPomodoros] = useState(0);
-  const [timerSettings, setTimerSettings] = useState({
-    pomodoro: 25,
-    shortBreak: 5,
-  });
+  const [timerSettings, setTimerSettings] = useState({pomodoro: 25,shortBreak: 5});
   useEffect(() => {
     let time;
     switch (activeMode) {

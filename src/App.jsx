@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Videos from "./pages/Videos";
 import Resources from "./pages/Resources";
 
-const queryClient = new QueryClient();
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const storedTheme = localStorage.getItem("theme");
@@ -15,7 +13,7 @@ const App = () => {
     const newTheme = !isDarkMode;
     setIsDarkMode(newTheme);
     localStorage.setItem("theme", newTheme ? "dark" : "light");
-    document.documentElement.classList.toggle("dark", newTheme); // for Tailwind dark mode
+    document.documentElement.classList.toggle("dark", newTheme);
   };
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
@@ -25,9 +23,7 @@ const App = () => {
       document.documentElement.classList.remove("dark");
     }
   }, []);
-
   return (
-    <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index toggleTheme={toggleTheme} isDarkMode={isDarkMode} />} />
@@ -35,7 +31,6 @@ const App = () => {
           <Route path="/resources" element={<Resources toggleTheme={toggleTheme} isDarkMode={isDarkMode} />} />
         </Routes>
       </BrowserRouter>
-    </QueryClientProvider>
   );
 };
 

@@ -21,7 +21,7 @@ export function NavBar({ toggleTheme, isDarkMode }) {
         </div>
         <div className="flex items-center gap-4">
           <Button onClick={toggleTheme} variant="ghost" className="px-6 py-3 rounded-full font-medium">{isDarkMode ? "Light" : "Dark"}</Button>
-          <button onClick={toggleMenu} className="md:hidden p-2 rounded-full hover:bg-muted transition" aria-label="Toggle menu">
+          <button onClick={toggleMenu} className="md:hidden p-2 rounded-full hover:bg-muted transition">
             {menuOpen ? <X size={20} /> : <Menu size={20} />}</button>
         </div>
       </div>

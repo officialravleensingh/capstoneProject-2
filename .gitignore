@@ -25,7 +25,3 @@ yarn-error.log*
 next-env.d.ts
 
 src/components/ui
-
-src/hooks
-
-src/lib

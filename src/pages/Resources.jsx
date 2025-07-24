@@ -1,6 +1,6 @@
 import { useState} from "react";
 import { NavBar } from "./NavBar";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card.tsx";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 

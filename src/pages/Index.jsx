@@ -90,26 +90,26 @@ const PomodoroTimer = () => {
         <button
           onClick={() => setActiveMode("pomodoro")}
           className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${activeMode === "pomodoro"
-              ? "bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-sm"
-              : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+            ? "bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-sm"
+            : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
             }`}>Focus</button>
         <button
           onClick={() => setActiveMode("shortBreak")}
           className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${activeMode === "shortBreak"
-              ? "bg-white dark:bg-gray-700 text-blue-600 dark:text-green-400 shadow-sm"
-              : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+            ? "bg-white dark:bg-gray-700 text-blue-600 dark:text-green-400 shadow-sm"
+            : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
             }`}>Short Break</button>
       </div>
 
       <div className="relative w-64 h-64 flex items-center justify-center mb-8">
         <svg className="absolute w-full h-full -rotate-90" viewBox="0 0 100 100">
-          <circle className="text-gray-200 dark:text-gray-700 stroke-current" strokeWidth="4" cx="50" cy="50" r="46" fill="transparent"/>
+          <circle className="text-gray-200 dark:text-gray-700 stroke-current" strokeWidth="4" cx="50" cy="50" r="46" fill="transparent" />
           <circle
             className={`stroke-current ${activeMode === "pomodoro"
-                ? "text-blue-500"
-                : "text-green-500"}`} 
-                strokeWidth="4" strokeLinecap="round" cx="50" cy="50" r="46" fill="transparent" strokeDasharray="289.02"
-                strokeDashoffset={289.02 - (289.02 * calculateProgress()) / 100}/>
+              ? "text-blue-500"
+              : "text-green-500"}`}
+            strokeWidth="4" strokeLinecap="round" cx="50" cy="50" r="46" fill="transparent" strokeDasharray="289.02"
+            strokeDashoffset={289.02 - (289.02 * calculateProgress()) / 100} />
         </svg>
 
         <div className="text-center z-10">
@@ -122,9 +122,9 @@ const PomodoroTimer = () => {
       <div className="flex space-x-4 mb-8">
         <button onClick={() => setIsRunning(!isRunning)}
           className={`px-6 py-3 rounded-full font-medium shadow-md transition-all ${isRunning
-              ? "bg-red-500 hover:bg-red-600 text-white" : "bg-blue-500 hover:bg-blue-600 text-white" }`} >
-          {isRunning ? "Pause" : "Start"} </button>
-
+            ? "bg-red-500 hover:bg-red-600 text-white" : "bg-blue-500 hover:bg-blue-600 text-white"}`} >
+          {isRunning ? "Pause" : timeLeft !== (activeMode === "pomodoro" ? timerSettings.pomodoro * 60 : timerSettings.shortBreak * 60)
+              ? "Resume": "Start"} </button>
         <button onClick={resetTimer}
           className="px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 flex items-center justify-center shadow-md transition-colors text-sm font-medium" >Reset</button>
       </div>
